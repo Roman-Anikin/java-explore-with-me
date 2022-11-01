@@ -1,5 +1,6 @@
 package ru.practicum.categories;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -11,17 +12,13 @@ import ru.practicum.utils.OffsetPageRequest;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Slf4j
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
     private final CategoryMapper categoryMapper;
     private final CategoryRepository repository;
-
-    public CategoryServiceImpl(CategoryMapper categoryMapper, CategoryRepository repository) {
-        this.categoryMapper = categoryMapper;
-        this.repository = repository;
-    }
 
     @Override
     public List<CategoryDto> getAll(Integer from, Integer size) {

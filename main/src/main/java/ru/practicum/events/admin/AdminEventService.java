@@ -1,4 +1,4 @@
-package ru.practicum.events.Admin;
+package ru.practicum.events.admin;
 
 import ru.practicum.events.EventCriteria;
 import ru.practicum.events.dto.FullEventDto;

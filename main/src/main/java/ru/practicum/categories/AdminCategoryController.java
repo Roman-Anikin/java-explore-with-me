@@ -1,19 +1,23 @@
 package ru.practicum.categories;
 
-import org.springframework.web.bind.annotation.*;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import ru.practicum.categories.dto.CategoryDto;
 
 import javax.validation.Valid;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(path = "/admin/categories")
 public class AdminCategoryController {
 
     private final CategoryService service;
-
-    public AdminCategoryController(CategoryService service) {
-        this.service = service;
-    }
 
     @PatchMapping
     public CategoryDto update(@Valid @RequestBody CategoryDto categoryDto) {

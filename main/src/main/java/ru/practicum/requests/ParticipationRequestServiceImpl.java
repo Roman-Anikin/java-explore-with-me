@@ -1,11 +1,12 @@
 package ru.practicum.requests;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import ru.practicum.events.Event;
 import ru.practicum.events.EventState;
-import ru.practicum.events.Private.PrivateEventService;
+import ru.practicum.events.userprivate.PrivateEventService;
 import ru.practicum.exceptions.ObjectNotFoundException;
 import ru.practicum.exceptions.ValidationException;
 import ru.practicum.requests.dto.ParticipationRequestDto;
@@ -15,6 +16,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor(onConstructor_ = @Lazy)
 @Slf4j
 @Service
 public class ParticipationRequestServiceImpl implements ParticipationRequestService {
@@ -23,16 +25,6 @@ public class ParticipationRequestServiceImpl implements ParticipationRequestServ
     private final UserService userService;
     private final RequestMapper requestMapper;
     private final ParticipationRequestRepository repository;
-
-    public ParticipationRequestServiceImpl(@Lazy PrivateEventService eventService,
-                                           UserService service,
-                                           RequestMapper requestMapper,
-                                           ParticipationRequestRepository repository) {
-        this.eventService = eventService;
-        this.userService = service;
-        this.requestMapper = requestMapper;
-        this.repository = repository;
-    }
 
     @Override
     public List<ParticipationRequestDto> getAllByUser(Long userId) {

@@ -1,5 +1,6 @@
-package ru.practicum.events.Public;
+package ru.practicum.events.userpublic;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -16,6 +17,7 @@ import ru.practicum.utils.OffsetPageRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 
+@AllArgsConstructor
 @Slf4j
 @Service
 public class PublicEventServiceImpl implements PublicEventService {
@@ -23,14 +25,6 @@ public class PublicEventServiceImpl implements PublicEventService {
     private final EventMapper eventMapper;
     private final EventRepository repository;
     private final EventClient client;
-
-    public PublicEventServiceImpl(EventMapper eventMapper,
-                                  EventRepository repository,
-                                  EventClient client) {
-        this.eventMapper = eventMapper;
-        this.repository = repository;
-        this.client = client;
-    }
 
     @Override
     public List<ShortEventDto> getAll(EventCriteria criteria) {

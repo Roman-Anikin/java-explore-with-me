@@ -1,4 +1,4 @@
-package ru.practicum.events.Public;
+package ru.practicum.events.userpublic;
 
 import ru.practicum.events.EventCriteria;
 import ru.practicum.events.dto.FullEventDto;

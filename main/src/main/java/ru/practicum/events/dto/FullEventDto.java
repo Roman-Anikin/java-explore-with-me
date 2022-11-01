@@ -1,6 +1,10 @@
 package ru.practicum.events.dto;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.ToString;
 import ru.practicum.categories.dto.CategoryDto;
 import ru.practicum.events.Location;
 import ru.practicum.users.dto.ShortUserDto;

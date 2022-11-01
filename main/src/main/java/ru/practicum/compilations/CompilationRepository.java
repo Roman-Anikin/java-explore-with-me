@@ -14,7 +14,7 @@ public interface CompilationRepository extends JpaRepository<Compilation, Long> 
     List<Compilation> findAllByPinnedIs(boolean pinned, Pageable pageable);
 
     @Modifying
-    @Query(value = "DELETE FROM event_compilation WHERE event_id = ?1 AND compilation_id = ?2", nativeQuery = true)
+    @Query(value = "DELETE FROM event_compilation WHERE compilation_id = ?1 AND event_id = ?2", nativeQuery = true)
     void deleteEvent(Long compilationId, Long eventId);
 
     @Modifying

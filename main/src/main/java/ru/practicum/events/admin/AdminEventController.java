@@ -1,21 +1,25 @@
-package ru.practicum.events.Admin;
+package ru.practicum.events.admin;
 
-import org.springframework.web.bind.annotation.*;
+import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PatchMapping;
 import ru.practicum.events.EventCriteria;
 import ru.practicum.events.dto.FullEventDto;
 import ru.practicum.events.dto.NewEventDto;
 
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(path = "/admin/events")
 public class AdminEventController {
 
     private final AdminEventService service;
-
-    public AdminEventController(AdminEventService service) {
-        this.service = service;
-    }
 
     @GetMapping
     public List<FullEventDto> getAll(EventCriteria criteria) {

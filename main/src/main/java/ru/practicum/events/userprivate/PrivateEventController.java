@@ -1,7 +1,15 @@
-package ru.practicum.events.Private;
+package ru.practicum.events.userprivate;
 
+import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.PatchMapping;
 import ru.practicum.events.dto.FullEventDto;
 import ru.practicum.events.dto.NewEventDto;
 import ru.practicum.events.dto.ShortEventDto;
@@ -12,16 +20,13 @@ import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(path = "/users/{userId}/events")
 @Validated
 public class PrivateEventController {
 
     private final PrivateEventService service;
-
-    public PrivateEventController(PrivateEventService service) {
-        this.service = service;
-    }
 
     @PostMapping
     public FullEventDto add(@PathVariable Long userId, @Valid @RequestBody NewEventDto eventDto) {
@@ -70,5 +75,4 @@ public class PrivateEventController {
                                                  @PathVariable Long reqId) {
         return service.rejectRequest(userId, eventId, reqId);
     }
-
 }

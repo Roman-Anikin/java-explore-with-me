@@ -30,4 +30,11 @@ public class ErrorHandler {
         log.info("Exception: {}", e.toString());
         return new ErrorResponse(e.getMessage());
     }
+
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ErrorResponse handleRuntimeException(final RuntimeException e) {
+        log.info("Exception: {}", e.toString());
+        return new ErrorResponse(e.getMessage());
+    }
 }

@@ -1,6 +1,10 @@
 package ru.practicum.requests;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.ToString;
 import ru.practicum.events.Event;
 import ru.practicum.users.User;
 

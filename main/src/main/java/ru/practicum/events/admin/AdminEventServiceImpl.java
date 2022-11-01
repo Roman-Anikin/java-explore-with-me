@@ -1,5 +1,6 @@
-package ru.practicum.events.Admin;
+package ru.practicum.events.admin;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -21,6 +22,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Slf4j
 @Service
 public class AdminEventServiceImpl implements AdminEventService {
@@ -30,18 +32,6 @@ public class AdminEventServiceImpl implements AdminEventService {
     private final CategoryMapper categoryMapper;
     private final EventRepository repository;
     private final CustomDateFormatter formatter;
-
-    public AdminEventServiceImpl(CategoryService categoryService,
-                                 EventMapper eventMapper,
-                                 CategoryMapper categoryMapper,
-                                 EventRepository repository,
-                                 CustomDateFormatter formatter) {
-        this.categoryService = categoryService;
-        this.eventMapper = eventMapper;
-        this.categoryMapper = categoryMapper;
-        this.repository = repository;
-        this.formatter = formatter;
-    }
 
     @Override
     public List<FullEventDto> getAllByAdmin(EventCriteria criteria) {

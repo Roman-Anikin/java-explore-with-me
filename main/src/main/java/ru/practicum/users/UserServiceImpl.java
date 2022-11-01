@@ -1,5 +1,6 @@
 package ru.practicum.users;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -13,18 +14,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Service
 @Slf4j
 public class UserServiceImpl implements UserService {
 
     private final UserMapper userMapper;
     private final UserRepository repository;
-
-    public UserServiceImpl(UserMapper userMapper,
-                           UserRepository repository) {
-        this.userMapper = userMapper;
-        this.repository = repository;
-    }
 
     @Override
     public FullUserDto add(FullUserDto userDto) {

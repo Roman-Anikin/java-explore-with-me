@@ -6,7 +6,6 @@ import ru.practicum.categories.dto.CategoryDto;
 import ru.practicum.events.dto.FullEventDto;
 import ru.practicum.events.dto.NewEventDto;
 import ru.practicum.events.dto.ShortEventDto;
-import ru.practicum.users.User;
 import ru.practicum.users.dto.ShortUserDto;
 import ru.practicum.utils.CustomDateFormatter;
 
@@ -48,25 +47,6 @@ public class EventMapper {
                 event.getPaid(),
                 event.getTitle(),
                 event.getViews());
-    }
-
-    public Event fromDto(FullEventDto eventDto) {
-        return new Event(eventDto.getId(),
-                eventDto.getAnnotation(),
-                new Category(eventDto.getCategory().getId(), eventDto.getCategory().getName()),
-                eventDto.getConfirmedRequests(),
-                LocalDateTime.now(),
-                eventDto.getDescription(),
-                formatter.stringToDate(eventDto.getEventDate()),
-                new User(eventDto.getInitiator().getId(), eventDto.getInitiator().getName(), null),
-                eventDto.getLocation(),
-                eventDto.getPaid(),
-                eventDto.getParticipantLimit(),
-                formatter.stringToDate(eventDto.getPublishedOn()),
-                eventDto.getRequestModeration(),
-                EventState.PENDING,
-                eventDto.getTitle(),
-                eventDto.getViews());
     }
 
     public Event fromDto(NewEventDto eventDto) {

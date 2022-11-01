@@ -1,4 +1,4 @@
-package ru.practicum.events.Private;
+package ru.practicum.events.userprivate;
 
 import ru.practicum.events.Event;
 import ru.practicum.events.dto.FullEventDto;

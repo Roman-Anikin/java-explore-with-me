@@ -1,5 +1,6 @@
 package ru.practicum.compilations;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -7,13 +8,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.practicum.compilations.dto.CompilationDto;
 import ru.practicum.compilations.dto.NewCompilationDto;
-import ru.practicum.events.Private.PrivateEventService;
+import ru.practicum.events.userprivate.PrivateEventService;
 import ru.practicum.exceptions.ObjectNotFoundException;
 import ru.practicum.utils.OffsetPageRequest;
 
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Slf4j
 @Service
 public class CompilationServiceImpl implements CompilationService {
@@ -21,14 +23,6 @@ public class CompilationServiceImpl implements CompilationService {
     private final CompilationMapper compilationMapper;
     private final PrivateEventService eventService;
     private final CompilationRepository repository;
-
-    public CompilationServiceImpl(CompilationMapper compilationMapper,
-                                  PrivateEventService eventService,
-                                  CompilationRepository repository) {
-        this.compilationMapper = compilationMapper;
-        this.eventService = eventService;
-        this.repository = repository;
-    }
 
     @Override
     public List<CompilationDto> getAll(boolean pinned, Integer from, Integer size) {

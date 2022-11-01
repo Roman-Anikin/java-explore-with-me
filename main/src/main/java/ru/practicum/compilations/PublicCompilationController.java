@@ -1,23 +1,25 @@
 package ru.practicum.compilations;
 
+import lombok.AllArgsConstructor;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import ru.practicum.compilations.dto.CompilationDto;
 
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.PositiveOrZero;
 import java.util.List;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping(path = "/compilations")
 @Validated
 public class PublicCompilationController {
 
     private final CompilationService service;
-
-    public PublicCompilationController(CompilationService service) {
-        this.service = service;
-    }
 
     @GetMapping
     public List<CompilationDto> getAll(@RequestParam(value = "pinned", required = false) boolean pinned,

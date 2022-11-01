@@ -1,5 +1,6 @@
 package ru.practicum.compilations;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.practicum.compilations.dto.CompilationDto;
 import ru.practicum.compilations.dto.NewCompilationDto;
@@ -11,9 +12,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@AllArgsConstructor
 public class CompilationMapper {
 
-    private final EventMapper mapper = new EventMapper();
+    private final EventMapper mapper;
 
     public CompilationDto toDto(Compilation compilation) {
         return new CompilationDto(compilation.getId(),

@@ -1,5 +1,6 @@
-package ru.practicum.events.Private;
+package ru.practicum.events.userprivate;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -31,6 +32,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
+@AllArgsConstructor
 @Slf4j
 @Service
 public class PrivateEventServiceImpl implements PrivateEventService {
@@ -44,26 +46,6 @@ public class PrivateEventServiceImpl implements PrivateEventService {
     private final RequestMapper requestMapper;
     private final EventRepository repository;
     private final CustomDateFormatter formatter;
-
-    public PrivateEventServiceImpl(UserService userService,
-                                   CategoryService categoryService,
-                                   ParticipationRequestService requestService,
-                                   EventMapper eventMapper,
-                                   UserMapper userMapper,
-                                   CategoryMapper categoryMapper,
-                                   RequestMapper requestMapper,
-                                   EventRepository repository,
-                                   CustomDateFormatter formatter) {
-        this.userService = userService;
-        this.categoryService = categoryService;
-        this.requestService = requestService;
-        this.eventMapper = eventMapper;
-        this.userMapper = userMapper;
-        this.categoryMapper = categoryMapper;
-        this.requestMapper = requestMapper;
-        this.repository = repository;
-        this.formatter = formatter;
-    }
 
     @Override
     public List<ShortEventDto> getAll(Long userId, Integer from, Integer size) {
