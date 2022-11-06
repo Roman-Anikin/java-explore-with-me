@@ -3,6 +3,9 @@ ALTER TABLE requests ALTER COLUMN request_id RESTART WITH 1;
 
 DELETE FROM event_compilation;
 
+DELETE FROM comments;
+ALTER TABLE comments ALTER COLUMN comment_id RESTART WITH 1;
+
 DELETE FROM events;
 ALTER TABLE events ALTER COLUMN event_id RESTART WITH 1;
 
@@ -14,5 +17,3 @@ ALTER TABLE categories ALTER COLUMN category_id RESTART WITH 1;
 
 DELETE FROM compilations;
 ALTER TABLE compilations ALTER COLUMN compilation_id RESTART WITH 1;
-
-

@@ -1,8 +1,10 @@
 package ru.practicum.events;
 
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 import ru.practicum.categories.Category;
 import ru.practicum.categories.dto.CategoryDto;
+import ru.practicum.comments.CommentMapper;
 import ru.practicum.events.dto.FullEventDto;
 import ru.practicum.events.dto.NewEventDto;
 import ru.practicum.events.dto.ShortEventDto;
@@ -10,13 +12,16 @@ import ru.practicum.users.dto.ShortUserDto;
 import ru.practicum.utils.CustomDateFormatter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+@AllArgsConstructor
 public class EventMapper {
 
-    private final CustomDateFormatter formatter = new CustomDateFormatter();
+    private CustomDateFormatter formatter;
+    private CommentMapper commentMapper;
 
     public FullEventDto toDto(Event event) {
         return new FullEventDto(event.getId(),
@@ -34,7 +39,8 @@ public class EventMapper {
                 event.getRequestModeration(),
                 event.getState().toString(),
                 event.getTitle(),
-                event.getViews());
+                event.getViews(),
+                commentMapper.toDto(event.getComments()));
     }
 
     public ShortEventDto toShortDto(Event event) {
@@ -46,7 +52,8 @@ public class EventMapper {
                 new ShortUserDto(event.getInitiator().getId(), event.getInitiator().getName()),
                 event.getPaid(),
                 event.getTitle(),
-                event.getViews());
+                event.getViews(),
+                commentMapper.toDto(event.getComments()));
     }
 
     public Event fromDto(NewEventDto eventDto) {
@@ -65,7 +72,8 @@ public class EventMapper {
                 eventDto.getRequestModeration(),
                 EventState.PENDING,
                 eventDto.getTitle(),
-                0);
+                0,
+                new ArrayList<>());
     }
 
     public List<FullEventDto> toDto(List<Event> events) {

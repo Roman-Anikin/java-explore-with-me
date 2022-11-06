@@ -6,7 +6,10 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 import ru.practicum.categories.dto.CategoryDto;
+import ru.practicum.comments.dto.CommentDto;
 import ru.practicum.users.dto.ShortUserDto;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,5 +27,5 @@ public class ShortEventDto {
     private Boolean paid;
     private String title;
     private int views;
-
+    private List<CommentDto> comments;
 }
