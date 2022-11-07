@@ -30,7 +30,7 @@ public class AdminCommentServiceImpl implements AdminCommentService {
         comment.setText(commentDto.getText());
         comment.setCreated(LocalDateTime.now());
         comment.setEdited(true);
-        log.info("Отредактирован комментарий {}", comment);
+        log.info("Администратор отредактировал комментарий {}", comment);
         return commentMapper.toDto(comment);
     }
 
@@ -39,7 +39,7 @@ public class AdminCommentServiceImpl implements AdminCommentService {
         eventService.getEventById(eventId);
         Comment comment = checkComment(commentId);
         repository.delete(comment);
-        log.info("Удален комментарий {}", comment);
+        log.info("Администратор удалил комментарий {}", comment);
     }
 
     private Comment checkComment(Long commentId) {
