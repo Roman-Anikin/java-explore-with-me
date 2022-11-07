@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 @Component
 public class EventMapper {
 
-    private final static CustomDateFormatter FORMATTER = new CustomDateFormatter();
-    private final static CommentMapper COMMENT_MAPPER = new CommentMapper(FORMATTER);
+    private static final CustomDateFormatter FORMATTER = new CustomDateFormatter();
+    private static final CommentMapper COMMENT_MAPPER = new CommentMapper(FORMATTER);
 
     public FullEventDto toDto(Event event) {
         return new FullEventDto(event.getId(),
