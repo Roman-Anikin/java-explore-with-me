@@ -18,8 +18,8 @@ public class CategoryDto {
 
     private Long id;
 
-    @NotBlank
-    @NotEmpty
+    @NotBlank(message = "Название не должно быть пустым")
+    @NotEmpty(message = "Название не должно быть пустым")
     private String name;
 
 }

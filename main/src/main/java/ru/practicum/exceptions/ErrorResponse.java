@@ -9,6 +9,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @ToString
 public class ErrorResponse {
 
+    private final List<String> errors;
     private final String message;
     private final String reason;
     private final String status;
@@ -24,6 +26,7 @@ public class ErrorResponse {
     private final LocalDateTime timestamp;
 
     public ErrorResponse(RuntimeException ex, String reason, HttpStatus status) {
+        this.errors = List.of(RuntimeException.class.toString());
         this.message = ex.getMessage();
         this.reason = reason;
         this.status = status.toString();
@@ -31,6 +34,7 @@ public class ErrorResponse {
     }
 
     public ErrorResponse(ConstraintViolationException ex, String reason, HttpStatus status) {
+        this.errors = List.of(ConstraintViolationException.class.toString());
         this.message = ex.getConstraintViolations()
                 .stream()
                 .map(ConstraintViolation::getMessage)
@@ -42,6 +46,7 @@ public class ErrorResponse {
     }
 
     public ErrorResponse(MethodArgumentNotValidException ex, String reason, HttpStatus status) {
+        this.errors = List.of(MethodArgumentNotValidException.class.toString());
         this.message = Objects.requireNonNull(ex.getBindingResult()
                         .getFieldError())
                 .getDefaultMessage();

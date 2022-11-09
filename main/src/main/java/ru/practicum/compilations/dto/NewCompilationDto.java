@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.ToString;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 @Getter
@@ -18,6 +20,9 @@ public class NewCompilationDto {
     private Long id;
     private List<Long> events;
     private boolean pinned;
+
+    @NotBlank(message = "Название не должно быть пустым")
+    @NotEmpty(message = "Название не должно быть пустым")
     private String title;
 
 }

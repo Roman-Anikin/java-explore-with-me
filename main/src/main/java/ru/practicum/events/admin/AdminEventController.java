@@ -12,6 +12,7 @@ import ru.practicum.events.EventCriteria;
 import ru.practicum.events.dto.FullEventDto;
 import ru.practicum.events.dto.NewEventDto;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,7 +28,7 @@ public class AdminEventController {
     }
 
     @PutMapping("/{eventId}")
-    public FullEventDto update(@PathVariable Long eventId, @RequestBody NewEventDto eventDto) {
+    public FullEventDto update(@PathVariable Long eventId, @Valid @RequestBody NewEventDto eventDto) {
         return service.updateByAdmin(eventId, eventDto);
     }
 

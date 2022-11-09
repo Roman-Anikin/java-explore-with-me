@@ -61,7 +61,8 @@ public class PublicEventServiceImpl implements PublicEventService {
     }
 
     private void checkSort(String sort) {
-        if (!EventSort.EVENT_DATE.toString().equals(sort) && !EventSort.VIEWS.toString().equals(sort)) {
+        if (sort != null && !EventSort.EVENT_DATE.toString().equals(sort)
+                && !EventSort.VIEWS.toString().equals(sort)) {
             throw new ValidationException("Неверный формат сортировки");
         }
     }
