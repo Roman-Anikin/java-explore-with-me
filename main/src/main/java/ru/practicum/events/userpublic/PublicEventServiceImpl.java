@@ -72,7 +72,9 @@ public class PublicEventServiceImpl implements PublicEventService {
     }
 
     private Sort getSorting(String sort) {
-        sort = EventSort.EVENT_DATE.toString().equals(sort) ? "eventDate" : "views";
-        return Sort.by(Sort.Direction.DESC, sort);
+        if (EventSort.valueOf(sort) == EventSort.EVENT_DATE) {
+            return Sort.by(Sort.Direction.ASC, "eventDate");
+        }
+        return Sort.by(Sort.Direction.DESC, "views");
     }
 }
