@@ -3,6 +3,7 @@ package ru.practicum.events;
 import org.springframework.stereotype.Component;
 import ru.practicum.categories.Category;
 import ru.practicum.categories.dto.CategoryDto;
+import ru.practicum.comments.CommentMapper;
 import ru.practicum.events.dto.FullEventDto;
 import ru.practicum.events.dto.NewEventDto;
 import ru.practicum.events.dto.ShortEventDto;
@@ -10,31 +11,34 @@ import ru.practicum.users.dto.ShortUserDto;
 import ru.practicum.utils.CustomDateFormatter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class EventMapper {
 
-    private final CustomDateFormatter formatter = new CustomDateFormatter();
+    private static final CustomDateFormatter FORMATTER = new CustomDateFormatter();
+    private static final CommentMapper COMMENT_MAPPER = new CommentMapper(FORMATTER);
 
     public FullEventDto toDto(Event event) {
         return new FullEventDto(event.getId(),
                 event.getAnnotation(),
                 new CategoryDto(event.getCategory().getId(), event.getCategory().getName()),
                 event.getConfirmedRequests(),
-                formatter.dateToString(event.getCreatedOn()),
+                FORMATTER.dateToString(event.getCreatedOn()),
                 event.getDescription(),
-                formatter.dateToString(event.getEventDate()),
+                FORMATTER.dateToString(event.getEventDate()),
                 new ShortUserDto(event.getInitiator().getId(), event.getInitiator().getName()),
                 event.getLocation(),
                 event.getPaid(),
                 event.getParticipantLimit(),
-                formatter.dateToString(event.getPublishedOn()),
+                FORMATTER.dateToString(event.getPublishedOn()),
                 event.getRequestModeration(),
                 event.getState().toString(),
                 event.getTitle(),
-                event.getViews());
+                event.getViews(),
+                COMMENT_MAPPER.toDto(event.getComments()));
     }
 
     public ShortEventDto toShortDto(Event event) {
@@ -42,11 +46,12 @@ public class EventMapper {
                 event.getAnnotation(),
                 new CategoryDto(event.getCategory().getId(), event.getCategory().getName()),
                 event.getConfirmedRequests(),
-                formatter.dateToString(event.getEventDate()),
+                FORMATTER.dateToString(event.getEventDate()),
                 new ShortUserDto(event.getInitiator().getId(), event.getInitiator().getName()),
                 event.getPaid(),
                 event.getTitle(),
-                event.getViews());
+                event.getViews(),
+                COMMENT_MAPPER.toDto(event.getComments()));
     }
 
     public Event fromDto(NewEventDto eventDto) {
@@ -56,7 +61,7 @@ public class EventMapper {
                 0,
                 LocalDateTime.now(),
                 eventDto.getDescription(),
-                formatter.stringToDate(eventDto.getEventDate()),
+                FORMATTER.stringToDate(eventDto.getEventDate()),
                 null,
                 eventDto.getLocation(),
                 eventDto.getPaid(),
@@ -65,7 +70,8 @@ public class EventMapper {
                 eventDto.getRequestModeration(),
                 EventState.PENDING,
                 eventDto.getTitle(),
-                0);
+                0,
+                new ArrayList<>());
     }
 
     public List<FullEventDto> toDto(List<Event> events) {

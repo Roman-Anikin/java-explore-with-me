@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import ru.practicum.compilations.dto.CompilationDto;
 import ru.practicum.compilations.dto.NewCompilationDto;
 
+import javax.validation.Valid;
+
 @AllArgsConstructor
 @RestController
 @RequestMapping(path = "/admin/compilations")
@@ -19,7 +21,7 @@ public class AdminCompilationController {
     private final CompilationService service;
 
     @PostMapping
-    public CompilationDto add(@RequestBody NewCompilationDto compilationDto) {
+    public CompilationDto add(@Valid @RequestBody NewCompilationDto compilationDto) {
         return service.add(compilationDto);
     }
 

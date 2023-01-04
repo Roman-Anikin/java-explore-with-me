@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import lombok.ToString;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
@@ -16,6 +18,9 @@ import javax.validation.constraints.Email;
 public class FullUserDto {
 
     private Long id;
+
+    @NotBlank(message = "Имя не должно быть пустым")
+    @NotEmpty(message = "Имя не должно быть пустым")
     private String name;
 
     @Email

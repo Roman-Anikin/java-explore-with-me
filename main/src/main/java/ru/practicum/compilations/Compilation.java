@@ -6,21 +6,16 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import ru.practicum.events.Event;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.ManyToMany;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
+import javax.persistence.*;
 import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedEntityGraph(
+        name = "compilation-entity-graph",
+        attributeNodes = @NamedAttributeNode("events"))
 @Entity
 @Table(name = "compilations")
 public class Compilation {

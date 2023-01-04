@@ -1,34 +1,26 @@
 package ru.practicum.events;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import ru.practicum.categories.Category;
+import ru.practicum.comments.Comment;
 import ru.practicum.users.User;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Column;
-import javax.persistence.ManyToOne;
-import javax.persistence.CascadeType;
-import javax.persistence.JoinColumn;
-import javax.persistence.Embedded;
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@NamedEntityGraph(
+        name = "event-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode("category"),
+                @NamedAttributeNode("initiator"),
+                @NamedAttributeNode("comments"),
+        }
+)
 @Entity
 @Table(name = "events")
 public class Event {
@@ -81,4 +73,29 @@ public class Event {
     private String title;
     private int views;
 
+    @OneToMany(mappedBy = "event")
+    private List<Comment> comments;
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", annotation='" + annotation + '\'' +
+                ", category=" + category +
+                ", confirmedRequests=" + confirmedRequests +
+                ", createdOn=" + createdOn +
+                ", description='" + description + '\'' +
+                ", eventDate=" + eventDate +
+                ", initiator=" + initiator +
+                ", location=" + location +
+                ", paid=" + paid +
+                ", participantLimit=" + participantLimit +
+                ", publishedOn=" + publishedOn +
+                ", requestModeration=" + requestModeration +
+                ", state=" + state +
+                ", title='" + title + '\'' +
+                ", views=" + views +
+                ", comments=" + comments +
+                '}';
+    }
 }

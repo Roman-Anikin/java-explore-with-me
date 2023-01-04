@@ -7,7 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.ToString;
 import ru.practicum.categories.dto.CategoryDto;
 import ru.practicum.events.Location;
+import ru.practicum.comments.dto.CommentDto;
 import ru.practicum.users.dto.ShortUserDto;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -32,5 +35,6 @@ public class FullEventDto {
     private String state;
     private String title;
     private int views;
+    private List<CommentDto> comments;
 
 }

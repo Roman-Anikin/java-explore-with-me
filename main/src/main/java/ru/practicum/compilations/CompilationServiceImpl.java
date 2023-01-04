@@ -73,8 +73,8 @@ public class CompilationServiceImpl implements CompilationService {
     @Override
     @Transactional
     public void pinningCompilation(boolean pin, Long compilationId) {
-        repository.pinningCompilation(pin, compilationId);
         Compilation compilation = checkCompilation(compilationId);
+        compilation.setPinned(pin);
         if (pin) {
             log.info("Подборка закреплена {}", compilation);
         } else {

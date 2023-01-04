@@ -81,6 +81,9 @@ public class EventSpecifications {
     }
 
     private static List<EventState> stateMapping(String[] strings) {
+        if (strings == null) {
+            return null;
+        }
         List<EventState> states = new ArrayList<>();
         for (String string : strings) {
             if (string.equals(EventState.valueOf(string).toString())) {

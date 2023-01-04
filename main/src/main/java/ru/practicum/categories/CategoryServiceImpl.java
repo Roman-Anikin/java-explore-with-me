@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.practicum.categories.dto.CategoryDto;
+import ru.practicum.exceptions.ObjectAlreadyExistException;
 import ru.practicum.exceptions.ObjectNotFoundException;
 import ru.practicum.utils.OffsetPageRequest;
 
@@ -37,6 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public CategoryDto update(CategoryDto categoryDto) {
         Category category = checkCategory(categoryDto.getId());
+        checkName(categoryDto.getName());
         category.setName(categoryDto.getName());
         log.info("Обновлена категория {}", category);
         return categoryMapper.toDto(category);
@@ -44,6 +46,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public CategoryDto add(CategoryDto categoryDto) {
+        checkName(categoryDto.getName());
         Category category = repository.save(categoryMapper.fromDto(categoryDto));
         log.info("Добавлена категория {}", category);
         return categoryMapper.toDto(category);
@@ -66,5 +69,12 @@ public class CategoryServiceImpl implements CategoryService {
 
     private Pageable getPageable(Integer from, Integer size) {
         return new OffsetPageRequest(from, size, Sort.unsorted());
+    }
+
+    private void checkName(String name) {
+        repository.findByName(name).ifPresent(
+                category -> {
+                    throw new ObjectAlreadyExistException("Категория с названием " + name + " уже существует.");
+                });
     }
 }
