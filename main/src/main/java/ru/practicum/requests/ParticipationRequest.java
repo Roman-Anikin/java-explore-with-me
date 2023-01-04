@@ -1,10 +1,9 @@
 package ru.practicum.requests;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-import lombok.ToString;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import ru.practicum.events.Event;
 import ru.practicum.users.User;
 
@@ -15,7 +14,23 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
+@NamedEntityGraph(
+        name = "request-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode(value = "event", subgraph = "event-subgraph"),
+                @NamedAttributeNode("requester")
+        },
+        subgraphs = {
+                @NamedSubgraph(
+                        name = "event-subgraph",
+                        attributeNodes = {
+                                @NamedAttributeNode("category"),
+                                @NamedAttributeNode("initiator"),
+                                @NamedAttributeNode("comments"),
+                        }
+                )
+        }
+)
 @Entity
 @Table(name = "requests")
 public class ParticipationRequest {
@@ -38,4 +53,14 @@ public class ParticipationRequest {
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
 
+    @Override
+    public String toString() {
+        return "ParticipationRequest{" +
+                "id=" + id +
+                ", event=" + event +
+                ", requester=" + requester +
+                ", created=" + created +
+                ", status=" + status +
+                '}';
+    }
 }

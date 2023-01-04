@@ -13,6 +13,14 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@NamedEntityGraph(
+        name = "event-entity-graph",
+        attributeNodes = {
+                @NamedAttributeNode("category"),
+                @NamedAttributeNode("initiator"),
+                @NamedAttributeNode("comments"),
+        }
+)
 @Entity
 @Table(name = "events")
 public class Event {

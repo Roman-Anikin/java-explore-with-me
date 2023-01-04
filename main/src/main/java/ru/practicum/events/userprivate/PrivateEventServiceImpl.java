@@ -213,5 +213,4 @@ public class PrivateEventServiceImpl implements PrivateEventService {
     private Pageable getPageable(Integer from, Integer size, Sort sort) {
         return new OffsetPageRequest(from, size, sort);
     }
-
 }

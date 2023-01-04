@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import ru.practicum.exceptions.ObjectAlreadyExistException;
 import ru.practicum.exceptions.ObjectNotFoundException;
 import ru.practicum.exceptions.ValidationException;
 import ru.practicum.users.dto.FullUserDto;
@@ -66,6 +67,11 @@ public class UserServiceImpl implements UserService {
         if (email == null || email.isEmpty() || email.isBlank()) {
             throw new ValidationException("Почта не может быть пустой");
         }
+        repository.findByEmail(email).ifPresent(
+                user -> {
+                    throw new ObjectAlreadyExistException("Пользователь с почтой " + email + " уже существует.");
+                }
+        );
     }
 
     private Pageable getPageable(Integer from, Integer size) {
